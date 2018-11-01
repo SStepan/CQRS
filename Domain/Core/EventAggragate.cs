@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CQRS.Domain
 {
@@ -30,6 +31,14 @@ namespace CQRS.Domain
         {
             Action<Event> genericHandler = eventInstance => handler.Invoke((TEvent)eventInstance);
             _eventHandlers[typeof(TEvent)] = genericHandler;
+        }
+
+        public void ApplyEvent(Event @event)
+        {
+            if (!_uncommittedChanges.Any(t => t.EventId == @event.EventId))
+            {
+                ((dynamic) this).Apply((dynamic) @event);
+            }
         }
 
         private void ApplyEvent<TEvent>(TEvent instance, bool isNew) where  TEvent : Event

@@ -1,8 +1,6 @@
-﻿using CQRS.Domain;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace CQRS.Employee.Domain
+namespace CQRS.Domain.Employee
 {
     class Employee : EventAggregate
     {
