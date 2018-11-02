@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CQRS.Domain.Employee
+namespace CQRS.Domain.Employee.Domain
 {
     internal class ExperienceRecord
     {

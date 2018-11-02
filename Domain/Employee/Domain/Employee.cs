@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using CQRS.Domain.Employee.Events;
 
-namespace CQRS.Domain.Employee
+namespace CQRS.Domain.Employee.Domain
 {
     class Employee : EventAggregate
     {
         private readonly List<ExperienceRecord> _experienceHistory = new List<ExperienceRecord>();
 
-        public Employee()
+        public Employee(string firstName, string lastName)
         {
-            RegisterEventHandler();
+            RaiseEvent(new EmployeeCreated(EntityId, firstName, lastName));
         }
 
         public string FirstName { get; set; }

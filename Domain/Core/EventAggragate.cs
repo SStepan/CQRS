@@ -41,6 +41,18 @@ namespace CQRS.Domain
             }
         }
 
+        protected void RaiseEvent<TEvent>(TEvent @event)
+            where TEvent : Event
+        {
+            ApplyEvent(@event);
+            _uncommittedChanges.Add(@event);
+        }
+
+        protected void AddUncommitedEvent<TEvent>(TEvent instance) where TEvent : Event
+        {
+            _uncommittedChanges.Add(instance);
+        }
+
         private void ApplyEvent<TEvent>(TEvent instance, bool isNew) where  TEvent : Event
         {
             if (instance == null)
